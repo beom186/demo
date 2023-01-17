@@ -1,0 +1,111 @@
+buildscript {
+	ext {
+		springBootVersion = '2.4.6'
+		queryDslVersion = "4.4.0"
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'war'
+
+bootWar {
+	archiveBaseName = 'ROOT'
+	//archiveFileName = 'ROOT_0.0.1_SNAPSHOT.war'
+	archiveFileName = 'ROOT.war'
+	archiveVersion = "0.0.1"
+}
+
+group 'kr.co.eight'
+version '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	//핫 스웹
+	//implementation 'org.springframework.boot:spring-boot-devtools:2.6.3'
+	compileOnly 'org.springframework.boot:spring-boot-devtools'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//annotationProcessor('org.projectlombok:lombok:1.18.12')
+	//testAnnotationProcessor('org.projectlombok:lombok:1.18.12')
+
+
+	//java 버전으로 어노테이션 맞지 않을 경우 아래 2줄 추가
+	implementation("javax.annotation:javax.annotation-api:1.3.2")
+	annotationProcessor("javax.annotation:javax.annotation-api:1.3.2")
+
+
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation('org.springframework.boot:spring-boot-starter-validation')
+	//implementation('org.projectlombok:lombok:1.18.12')
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+
+
+	//임삭
+	//implementation('com.google.firebase:firebase-admin:7.3.0')
+
+	//임삭
+	//implementation "org.springframework.boot:spring-boot-starter-security"
+	//implementation 'org.springframework.security:spring-security-web:5.5.0'
+	//implementation 'org.springframework.security:spring-security-config:5.5.0'
+
+	//임삭
+	//implementation('org.springframework.boot:spring-boot-starter-mail')
+
+//임삭
+	//implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.8'
+	//implementation group: 'org.springframework.integration', name: 'spring-integration-sftp', version: '5.1.13.RELEASE'
+
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2',
+			// Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+			//'org.bouncycastle:bcprov-jdk15on:1.60',
+			'io.jsonwebtoken:jjwt-jackson:0.11.2' // or 'io.jsonwebtoken:jjwt-gson:0.11.2' for gson
+
+	// QueryDSL
+	implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+	annotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+	testImplementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+	testAnnotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
+	//임삭
+	//testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+	//스타터 할때 빌드 반드시 필요
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+	//임삭
+	//implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
+
+	implementation group: 'org.hibernate', name: 'hibernate-spatial', version: '5.5.3.Final'
+
+//임삭
+	//implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+	//implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+	//implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+	implementation 'ch.qos.logback:logback-core:1.2.3'
+	implementation 'org.slf4j:slf4j-api:1.7.30'
+
+
+	//implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+
+}
